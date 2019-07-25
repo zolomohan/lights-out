@@ -46,7 +46,7 @@ class Board extends Component {
   }
 
   /** create a board nrows high/ncols wide, each cell randomly lit or unlit */
-  randomBoolean = () => (Math.floor(Math.random() * 2)) === 0 ? false: true;
+  randomBoolean = () => (Math.floor(Math.random() * 4)) === 0 ? true: false;
 
   createBoard() {
     let {nrows, ncols} = this.props;
@@ -64,18 +64,18 @@ class Board extends Component {
   /** handle changing a cell: update board & determine if winner */
 
   flipCellsAround(coord) {
-    let {ncols, nrows} = this.props;
-    let board = this.state.board;
-    let [y, x] = coord.split("-").map(Number);
+    // let {ncols, nrows} = this.props;
+    // let board = this.state.board;
+    // let [y, x] = coord.split("-").map(Number);
 
 
-    function flipCell(y, x) {
-      // if this coord is actually on board, flip it
+    // function flipCell(y, x) {
+    //   // if this coord is actually on board, flip it
 
-      if (x >= 0 && x < ncols && y >= 0 && y < nrows) {
-        board[y][x] = !board[y][x];
-      }
-    }
+    //   if (x >= 0 && x < ncols && y >= 0 && y < nrows) {
+    //     board[y][x] = !board[y][x];
+    //   }
+    // }
 
     // TODO: flip this cell and the cells around it
 
@@ -95,7 +95,17 @@ class Board extends Component {
     return(
         <table className="Board">
             <tbody>
-                {this.state.board.map( (row,i) => <tr> {row.map( (cell, j) => <Cell isLit={cell} />)}</tr>)}
+                {this.state.board.map( (row,i) => 
+                    <tr key={i}> 
+                        {row.map( (cell, j) => 
+                            <Cell
+                                key={i+'-'+j} 
+                                isLit={cell} 
+                                flipCellsAroundMe = {this.flipCellsAround} 
+                            />)
+                        }
+                    </tr>)
+                }
             </tbody>
         </table>
     )
