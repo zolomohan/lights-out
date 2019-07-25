@@ -56,10 +56,12 @@ class Board extends Component {
   render() {
     return(
         (this.state.hasWon 
-            ?   <div class="Board-title winner">
-                <div class="neon">You</div>
-                <div class="flux">Win</div>
-                <button onClick={this.restart}>Restart</button>
+            ?   <div>
+                <div className="Board-title winner">
+                <div className="neon">You</div>
+                <div className="flux">Win</div>
+                </div>
+                <button className="neon" id="restartBtn" onClick={this.restart}>Restart</button>
                 </div> 
             :   <div>
                 <div class="Board-title">

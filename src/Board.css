@@ -77,3 +77,11 @@ table tr:last-child td:last-child{
     color: #146C80;
   }
 }
+
+#restartBtn{
+  background: none;
+  border: none;
+  cursor: pointer;
+  margin-top: 10vh;
+  outline: none;
+}
