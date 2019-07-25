@@ -4,5 +4,6 @@ body {
   background-color: #212121;
   text-align: center;
   padding: 5vh;
+  user-select: none;
 }
 
