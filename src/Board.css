@@ -50,6 +50,10 @@ table tr:last-child td:last-child{
   -o-animation: flux 2s linear infinite;
 }
 
+.winner .neon, .winner .flux{
+  font-size: 200px;
+}
+
 @keyframes neon {
   0%,
   100% {
