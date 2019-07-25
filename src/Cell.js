@@ -22,7 +22,7 @@ class Cell extends Component {
   }
 
   handleClick(evt) {
-    this.props.flipCellsAroundMe();
+    this.props.flipCellsAround();
   }
 
   render() {

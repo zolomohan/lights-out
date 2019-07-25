@@ -64,25 +64,27 @@ class Board extends Component {
   /** handle changing a cell: update board & determine if winner */
 
   flipCellsAround(coord) {
-    // let {ncols, nrows} = this.props;
-    // let board = this.state.board;
-    // let [y, x] = coord.split("-").map(Number);
+    let {ncols, nrows} = this.props;
+    let board = this.state.board;
+    let [y, x] = coord.split("-").map(Number);
 
-
-    // function flipCell(y, x) {
-    //   // if this coord is actually on board, flip it
-
-    //   if (x >= 0 && x < ncols && y >= 0 && y < nrows) {
-    //     board[y][x] = !board[y][x];
-    //   }
-    // }
+    function flipCell(y, x) {
+      if (x >= 0 && x < ncols && y >= 0 && y < nrows) {
+        board[y][x] = !board[y][x];
+      }
+    }
+    flipCell(y, x);
+    flipCell(y-1, x);
+    flipCell(y+1, x);
+    flipCell(y, x-1);
+    flipCell(y, x+1);
 
     // TODO: flip this cell and the cells around it
 
+    let hasWon = board.every(row => row.every(cell => !cell));
     // win when every cell is turned off
     // TODO: determine is the game has been won
-
-    // this.setState({board, hasWon});
+    this.setState({board, hasWon});
   }
 
 
@@ -91,8 +93,14 @@ class Board extends Component {
   render() {
 
     // if the game is won, just show a winning msg & render nothing else
+    if(this.state.hasWon) return <h1>You Win</h1>
 
     return(
+        <div>
+        <div class="Board-title">
+            <div class="neon">Lights </div>
+            <div class="flux">Out </div>
+        </div>
         <table className="Board">
             <tbody>
                 {this.state.board.map( (row,i) => 
@@ -101,13 +109,14 @@ class Board extends Component {
                             <Cell
                                 key={i+'-'+j} 
                                 isLit={cell} 
-                                flipCellsAroundMe = {this.flipCellsAround} 
+                                flipCellsAround = {() => this.flipCellsAround(i+'-'+j)}  
                             />)
                         }
                     </tr>)
                 }
             </tbody>
         </table>
+        </div>
     )
 
     // TODO
